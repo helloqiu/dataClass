@@ -1,5 +1,4 @@
-#ifndef AVLTREE_H
-#define AVLTREE_H
+#define MAX(num1 , num2) ((num1) > (num2) ? (num1) : (num2))
 #include "Node.h"
 class avlTree{
 	public :
@@ -8,18 +7,15 @@ class avlTree{
 		void showAll(void);
 	private :
 		Node createNode(Node left , Node right , int data);
-		static Node LL(Node rootnode);
-		static Node RR(Node rootnode);
-		static Node LR(Node rootNode);
-		static Node RL(Node rootNode);
+		Node LL(Node rootnode);
+		Node RR(Node rootnode);
+		Node LR(Node rootNode);
+		Node RL(Node rootNode);
 		Node nodeInsert(Node rootNode , int data);
 		Node findMax(Node rootNode);
 		Node findMin(Node rootNode);
 		Node find(int data);
 		void printNode(Node rootnode , int dir , int data);
-		bool find(Node node);
-
+		int height(Node node);
 		Node RootNode;
 };
-
-#endif // AVLTREE_H

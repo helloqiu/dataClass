@@ -15,19 +15,7 @@ int main(void){
 		tree.add(tmp);
 		tree.showAll();
 	}
-	cout << "here is the tree :" << endl;
+	cout << "here id the tree :" << endl;
 	tree.showAll();
-	while(true){
-		cout << "please enter the number that you what to find and enter 0 to halt:\n";
-		cin >> tmp;
-		if (tmp == 0){
-			break;
-		}
-		if (tree.findNode(tmp)){
-			cout << "find the node!\n";
-		}else{
-			cout << "not find the node!\n";
-		}
-	}
 	return 0;
 }
