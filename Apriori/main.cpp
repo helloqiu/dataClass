@@ -9,6 +9,15 @@ int main(void){
 	int data;
 	while (true){
 		cin >> data;
+		if (data == -1){
+			cin >> data;
+			if(tree->nodeFind(tree->root, data)){
+				cout << "find " << data << " succeed!\n"; 
+			}else{
+				cout << "find " << data << " fail!\n";
+			}
+			continue;
+		}
 		tree->nodeInsert(tree->root, data);
 		cout << "insert over\n";
 		tree->nodePrint(tree->root, 0, tree->root->data);
