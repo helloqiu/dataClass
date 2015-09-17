@@ -53,6 +53,33 @@ Node* AvlTree::nodeInsert(Node* rootNode , int data){
 		rootNode -> left = nodeInsert(rootNode->left, data);
 		rootNode -> height = MAX(Height(rootNode->left) , Height(rootNode -> right)) + 1;
 		int rightHeight = 0;
-		if (root)
+		if (rootNode -> right != NULL){
+			rightHeight = rootNode -> right -> height;
+		}
+		if (rootNode -> left -> height >= rightHeight + 2){
+			if (data < rootNode -> left -> data){
+				rootNode = LL(rootNode);
+			}else{
+				rootNode = LR(rootNode);
+			}
+		}
+	}else{
+		if (data > rootNode -> data){
+			rootNode -> right = nodeInsert(rootNode -> right, data);
+			rootNode -> height = 1 + MAX(rootNode -> left -> height , rootNode -> right -> height);
+			int leftHeight = 0;
+			if (rootNode -> left != NULL){
+				leftHeight = rootNode -> left -> height;
+			}
+			if (rootNode -> right -> height >= leftHeight + 2){
+				if (data > rootNode -> right -> data){
+					rootNode = RR(rootNode);
+				}else{
+					rootNode = RL(rootNode);
+				}
+			}
+		}
 	}
+	rootNode -> height = MAX(rootNode -> left -> height , rootNode -> right -> height) + 1;
+	return rootNode;
 }

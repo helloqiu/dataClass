@@ -39,6 +39,6 @@ void queue::showQueue(){
 	while (tempH != tail){
 		tempH += 1;
 		tempH %= 100;
-		cout << num[tempH] << "\n";
+		cout << num[tempH] << " ";
 	}
 }
