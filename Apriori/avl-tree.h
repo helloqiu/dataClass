@@ -15,9 +15,12 @@ class AvlTree{
 public:
 	Node* root;
 
+	AvlTree();
 	Node* LL(Node* rootNode);
 	Node* RR(Node* rootNode);
 	Node* LR(Node* rootNode);
 	Node* RL(Node* rootNode);
-	Node* nodeInsert(Node* rootNode , int data);
+	Node* nodeInsert(Node* &rootNode , int data);
+	bool nodeFind(Node* rootNode , int data);
+	void nodePrint(Node* rootnode , int dir , int data);
 };

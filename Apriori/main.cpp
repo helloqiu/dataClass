@@ -1,33 +1,17 @@
 #include<iostream>
-#include"avlTree.h"
+#include"avl-tree.h"
 using namespace std;
 
 int main(void){
 	cout << "This is an avl tree" << endl;
-	avlTree tree;
-	int tmp = 0;
-	while (1){
-		cout << "please enter intergers : ";
-		cin >> tmp;
-		if (tmp == -1){
-			break;
-		}
-		tree.add(tmp);
-		tree.showAll();
-	}
-	cout << "here is the tree :" << endl;
-	tree.showAll();
-	while(true){
-		cout << "please enter the number that you what to find and enter 0 to halt:\n";
-		cin >> tmp;
-		if (tmp == 0){
-			break;
-		}
-		if (tree.findNode(tmp)){
-			cout << "find the node!\n";
-		}else{
-			cout << "not find the node!\n";
-		}
+	AvlTree* tree = new AvlTree();
+	cout << "please enter the node :\n";
+	int data;
+	while (true){
+		cin >> data;
+		tree->nodeInsert(tree->root, data);
+		cout << "insert over\n";
+		tree->nodePrint(tree->root, 0, tree->root->data);
 	}
 	return 0;
 }

@@ -13,6 +13,9 @@ Node::Node(Node* left , Node* right , int data){
 	this -> right = right;
 	this -> height = 1;
 }
+AvlTree::AvlTree(){
+	this -> root = NULL;
+}
 
 Node* AvlTree::LL(Node* rootNode){
 	Node* node;
@@ -41,9 +44,10 @@ Node* AvlTree::RL(Node* rootNode){
 	rootNode -> right = LL(rootNode->right);
 	return RR(rootNode);
 }
-Node* AvlTree::nodeInsert(Node* rootNode , int data){
+Node* AvlTree::nodeInsert(Node* &rootNode , int data){
 	if (rootNode == NULL){
 		rootNode = new Node(NULL, NULL, data);
+		
 		return rootNode;
 	}
 	if (data == rootNode->data){
@@ -56,7 +60,7 @@ Node* AvlTree::nodeInsert(Node* rootNode , int data){
 		if (rootNode -> right != NULL){
 			rightHeight = rootNode -> right -> height;
 		}
-		if (rootNode -> left -> height >= rightHeight + 2){
+		if (Height(rootNode -> left) >= rightHeight + 2){
 			if (data < rootNode -> left -> data){
 				rootNode = LL(rootNode);
 			}else{
@@ -66,12 +70,12 @@ Node* AvlTree::nodeInsert(Node* rootNode , int data){
 	}else{
 		if (data > rootNode -> data){
 			rootNode -> right = nodeInsert(rootNode -> right, data);
-			rootNode -> height = 1 + MAX(rootNode -> left -> height , rootNode -> right -> height);
+			rootNode -> height = 1 + MAX(Height(rootNode -> left) , Height(rootNode -> right));
 			int leftHeight = 0;
 			if (rootNode -> left != NULL){
 				leftHeight = rootNode -> left -> height;
 			}
-			if (rootNode -> right -> height >= leftHeight + 2){
+			if (Height(rootNode -> right) >= leftHeight + 2){
 				if (data > rootNode -> right -> data){
 					rootNode = RR(rootNode);
 				}else{
@@ -80,6 +84,31 @@ Node* AvlTree::nodeInsert(Node* rootNode , int data){
 			}
 		}
 	}
-	rootNode -> height = MAX(rootNode -> left -> height , rootNode -> right -> height) + 1;
+	rootNode -> height = MAX(Height(rootNode -> left) , Height(rootNode -> right)) + 1;
 	return rootNode;
+}
+bool AvlTree::nodeFind(Node* rootNode , int data){
+	if (rootNode == NULL){
+		return false;
+	}
+	if(rootNode -> data == data){
+		return true;
+	}
+	if (rootNode -> data > data){
+		return nodeFind(rootNode -> left , data);
+	}else{
+		return nodeFind(rootNode -> right, data);
+	}
+}
+void AvlTree::nodePrint(Node* rootnode , int dir , int data){
+	if (rootnode == NULL){
+        return;
+    }
+    if (dir == 0){
+        printf("%d is the root\n" , data);
+    }else{
+        printf("%d is %d's %s child \n" , rootnode -> data , data , dir == 1?"right" : "left");
+    }
+    nodePrint(rootnode -> left , -1 , rootnode -> data);
+    nodePrint(rootnode -> right , 1 , rootnode -> data);
 }
