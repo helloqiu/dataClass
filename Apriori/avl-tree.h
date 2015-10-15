@@ -23,4 +23,5 @@ public:
 	Node* nodeInsert(Node* &rootNode , int data);
 	bool nodeFind(Node* rootNode , int data);
 	void nodePrint(Node* rootnode , int dir , int data);
+	Node* nodeDelete(Node* rootnode , int data);
 };
